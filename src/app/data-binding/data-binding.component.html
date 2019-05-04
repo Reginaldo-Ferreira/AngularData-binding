@@ -1,0 +1,107 @@
+<br>
+<section class="input-output-properties">
+  <article>
+    <h3>Input/Output Properties</h3>
+
+    <app-curso [nome]="nomedoCurso"></app-curso>
+    <!--[nome] foi criado com @input no app InputPropertyComponent-->
+    <contador valor="10"></contador><!-- vem deste componente 'output-property.component'-->
+    <!-- ou assim -->
+    <contador [valor]="valorIncial" 
+    (mudouValor)="onMudouValor($event)"></contador><!-- vem deste componente 'output-property.component'-->
+    <!--'valorIncial' valor eviado atraves do @input direto para o App outPut-property-->
+  </article>
+</section>
+
+    <app-meu-form></app-meu-form>
+
+    <br>
+    <p>
+      <a class="btn btn-primary" data-toggle="collapse" href="#Interpolation" role="button" aria-expanded="false" aria-controls="Interpolation">Interpolation / Interpolação</a>
+  
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#clasStyleBinding" aria-expanded="false"
+        aria-controls="clasStyleBinding">Class e style Binding</button>
+  
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
+        aria-controls="Interpolation clasStyleBinding">Toggle both elements</button>
+  
+    </p>
+    <div class="row">
+  
+      <div class="col">
+        <div class="collapse multi-collapse" id="Interpolation">
+          <div class="card card-body">
+  
+            <article>
+              <h3>Interpolation / Interpolação</h3>
+              <p>String renderizada com intepolação: {{ url }}</p>
+  
+              <p>Resultado de 1 + 1 é: {{ 1 + 1}}</p>
+              <p>Resultado de 1 + 1 não é: {{ 1 + 1 + getValor()}}</p>
+              <p>Curso de Angula e gosto de curso: {{ cursoAngular && getCurtirCurso()}}</p>
+            </article>
+  
+            <article>
+              <h3>Property Binding</h3>
+              <img src="{{ urlImagem}}" alt="Natureza">
+              <img [src]="urlImagem">
+              <img bind-src="urlImagem">
+            </article>
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="collapse multi-collapse" id="clasStyleBinding">
+          <div class="card card-body">
+  
+            <section>
+              <article>
+                <h3>Class e style Binding</h3>
+  
+                <!--button type="button" class="btn btn-primary"
+                      tooltip="verificar mouse sobre botão.">
+                simples botão
+              </button-->
+                <div>
+                  selecione uma classe:
+                  <!--#classe variavel para para representar combobox-->
+                  <!-- O evento (change) esta atribuido como '0' isso quer dizer que nenhum seleção esta ativa-->
+                  <select name="" id="" #classe (change)='0'>
+                    <option value="alert-primary"> Primeiro Alerta</option>
+                    <option value="alert-secondary"> Segundo Alerta</option>
+                    <option value="alert-success">Sucesso</option>
+                    <option value="alert-info">Info</option>
+                    <option value="alert-warning">alerta</option>
+                    <option value="alert-danger">Erro</option>
+                    <option value="alert-light">Leve</option>
+                    <option value="alert-dark">Escuro</option>
+                  </select>
+  
+                  <br>
+                  <br>
+                  <div class="alert {{ classe.value }}" role="alert">colore conforme combobox</div>
+                  <!--Property Binding aplicado a classe e chama-se o objeto class...  [class.alert-primary]="classe.value =='alert-primary'" a classe em [class] só será aplicado se obedecer a condição de pois do sinal '=' -->
+                  <div class="alert " role="alert" [class.alert-primary]="classe.value =='alert-primary'"> Primeiro Alerta!</div>
+                  <div class="alert " role="alert" [class.alert-secondary]="classe.value =='alert-secondary'">Segundo Alerta!</div>
+                  <div class="alert " role="alert" [class.alert-success]="classe.value =='alert-success'">Sucesso!</div>
+                  <div class="alert " role="alert" [class.alert-danger]="classe.value =='alert-danger'">Erro</div>
+                  <div class="alert " role="alert" [class.alert-warning]="classe.value =='alert-warning'">alerta!</div>
+                  <div class="alert " role="alert" [class.alert-info]="classe.value =='alert-info'">Info!</div>
+                  <div class="alert " role="alert" [class.alert-light]="classe.value =='alert-light'">Leve!</div>
+                  <div class="alert " role="alert" [class.alert-dark]="classe.value =='alert-dark'">Escuro!</div>
+  
+                  <div class="alert alert-danger" role="alert" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">Só aparecer em caso de Erro</div>
+  
+                </div>
+              </article>
+            </section>
+  
+  
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  

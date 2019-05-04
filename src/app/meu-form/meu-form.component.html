@@ -1,0 +1,112 @@
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#twoWeydataBdg" role="button" aria-expanded="false" aria-controls="twoWeydataBdg">
+    Two-Way Data-Binding
+    <</a>
+      <a class="btn btn-primary" data-toggle="collapse" href="#eventbinding" role="button" aria-expanded="false" aria-controls="eventbinding">
+        event Binding</a>
+      <a class="btn btn-primary" data-toggle="collapse" href="#twoweydatabindingcomobjeto" role="button" aria-expanded="false"
+        aria-controls="twoweydatabindingcomobjeto">
+        Two-Way Dt-Bdg com 'OBJETOS</a>
+
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
+        aria-controls="twoWeydataBdg eventbinding twoweydatabindingcomobjeto">Toggle both elements</button>
+</p>
+<div class="row">
+
+  <div class="col">
+    <div class="collapse multi-collapse" id="twoWeydataBdg">
+      <div class="card card-body">
+        <section class="two-way-binding">
+          <article>
+            <h3>Two-Way data binding</h3>
+            <div>              <!-- o evento (input) faz a mudança quando é feita uma entrada de teclado e grava o volor do input na variavel 'nome'-->
+              Usando (input) evento:<!--[value] é um atributo do input na forma do angula, passando o valor da variavel nome para o input -->
+              <input type="text" [value]="nome" (input)="nome = $event.target.value" />
+                                        <!--IMPORTANTE-->
+                          <!--[value] recebe valor // (input) envia valor -->
+
+              <!--ngModel é uma represetação de uma entidade, podendo receber um 'objeto' 
+                  ngModel também representa uma entrada [propriedade padrão] para o objetoHtml no caso input passando para o input o valor da variave nome para o mesmo-->
+              <input type="text" [ngModel]="nome" (ngModelChange)="nome = $event" />
+              <!-- (ngModelChange é um evento do angula para o campo for atualizado) aparti do event já pegar o valor de target.value-->
+
+              <input type="text" [(ngModel)]="nome"><!--[(ngModel)] desta forma ele é propiedade e evento ao mesmo tempo que recebe envia devolta para a variavel o valor de entrada -->
+              <!--two way data binding ligando os dois lados servidor e template
+                          outra maneira de escrever o comando 'bindon-ngModel'-->
+              <input type="text" bindon-ngModel="nome">
+
+              <p>Você digitou: {{ nome }}</p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="collapse multi-collapse" id="eventbinding">
+      <div class="card card-body">
+        <section class="event-binding">
+          <article>
+            <h3>Event binding</h3>
+            <br>
+            <div>
+              <!-- (click) poderia ser escrito 'on-click'     escutando eventos do template html ou dom html (ação de evento)-->
+              <button (click)="botaoClicado()" class="btn btn-primary">Me click</button>
+              <!---->
+            </div>
+            <br>
+            <br>
+            <!--(keyup) quando é teclado uma tecla do teclado e pega o valor com o paramentro com o $event -->
+            <!--(keyup.enter) quando presiona a tecla enter '$event.target.value' já pega o valor direto do template-->
+            <!--(blur) quando o  componente perde o foco foi declado uma variavel '#campoInput' para representa o componete e assim passamos o valor direto da variavel 'campoInput.value'-->
+            <input type="text" (keyup)="onKeyUp($event)" (keyup.enter)="salvarValor($event.target.value)" (blur)="salvarValor(campoInput.value)"
+              #campoInput/><!--melhor sempre declara uma variavel para passar dados-->
+
+            <p>Valor atual: {{ valorAtual }}</p>
+            <p>Valor salvo: {{ valorSalvo }}</p>
+            <br>
+            <!--(mouseover) quando o mouse estiver em cima do componente
+                               (mouseout) quando o mouse estiver fora do componente escutando o mesmo metodo 'onMouseOverOut()'
+                                que muda ou nega a variavel 'isMouseOver' retornando boolean para o propety binding [class.highlight] -->
+            <span (mouseover)="onMouseOverOut()" (mouseout)="onMouseOverOut()" [class.highlight]="isMouseOver">
+              Passe o mouse sobre mim </span>
+            <!-- classe de css feito no arquivo com o nome .highlight -->
+            <br>
+            <br>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="collapse multi-collapse" id="twoweydatabindingcomobjeto">
+      <div class="card card-body">
+
+        <section>
+          <h3>Two-Way dt bdg object </h3>
+          <br>
+          <div>
+
+            <input type="text" [(ngModel)]="pessoa.nome">
+            <input type="text" [(ngModel)]="pessoa.idade">
+            <input type="text" [(ngModel)]="pessoa.end">
+
+            <!--input type="text" ([ngmodel)]="pessoa.end"-->
+          </div>
+        </section>
+        <section>
+          <h3>O que foi mudado no objeto </h3>
+          <p><span>NOME</span> atual: {{ pessoa.nome }}</p>
+          <p><span>IDADE</span> atual: {{ pessoa.idade }}</p>
+          <p><span>END</span> atual: {{ pessoa.end }}</p>
+
+        </section>
+
+        
+      </div>
+    </div>
+  </div>
+
+</div>
